@@ -35,16 +35,30 @@ public class Scanner extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        resultData.setText(result.getText());
+                        /*resultData.setText(result.getText());*/
+                        if(result.getText().contains("http://")||result.getText().contains("https://")){
 
-                        resultData.setOnClickListener(new View.OnClickListener() {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(result.toString()));
+                            startActivity(intent);
+                        }
+                        else{
+                            resultData.setText(result.getText());
+                        }
+
+
+                       /* resultData.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(Intent.ACTION_VIEW);
-                                intent.setData(Uri.parse(result.toString()));
-                                startActivity(intent);
+                                if(result.getText().contains("http://")){
+
+                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                                    intent.setData(Uri.parse(result.toString()));
+                                    startActivity(intent);
+                                }
+
                             }
-                        });
+                        });*/
                     }
                 });
 
